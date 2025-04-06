@@ -4,7 +4,7 @@ from flasgger.utils import swag_from
 
 cartao_blueprint = Blueprint('cartao', __name__, url_prefix="/")
 
-@cartao_blueprint.route("/gerar-cartao", methods=["POST"])
+@cartao_blueprint.route("/gerar-cartao", methods=["GET"])
 def gerar_cartao():
     """
     Gera um cartão-resposta em PDF a partir de respostas ou quantidade de questões.
@@ -12,20 +12,18 @@ def gerar_cartao():
     tags:
       - Cartão Resposta
     parameters:
-      - in: body
-        name: body
-        required: true
-        schema:
-          type: object
-          properties:
-            quantidade:
-              type: integer
-              description: "Número de questões (se 'respostas' não for fornecido)"
-              example: 10
-            marcar:
-              type: boolean
-              description: "Se True, marca a alternativa nas bolhas"
-              example: False
+      - name: quantidade
+        in: query
+        type: integer
+        required: false
+        description: "Número de questões (se 'respostas' não for fornecido)"
+        example: 10
+      - name: marcar
+        in: query
+        type: boolean
+        required: false
+        description: "Se True, marca a alternativa nas bolhas"
+        example: false
     responses:
       200:
         description: PDF com o cartão-resposta gerado
@@ -35,9 +33,11 @@ def gerar_cartao():
               type: string
               format: binary
     """
-
-    dados = request.get_json()
     try:
+        quantidade = request.args.get("quantidade", type=int)
+        marcar = request.args.get("marcar", default=False, type=lambda v: v.lower() == "true")
+
+        dados = {"quantidade": quantidade, "marcar": marcar}
         return gerar_pdf_cartao(dados)
     except Exception as e:
         return jsonify({"erro": str(e)}), 400
