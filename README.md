@@ -1,7 +1,7 @@
 
-# 🧠 pyAnalise - Geração e Correção de Cartões-Resposta
+# 🧠 RespondeAI - Geração e Correção de Cartões-Resposta
 
-O **pyAnalise** é um sistema de análise e correção automatizada de cartões-resposta, que permite:
+O **RespondeAI** é um sistema de análise e correção automatizada de cartões-resposta, que permite:
 
 ✅ Gerar cartões-resposta personalizados em PDF  
 ✅ Corrigir cartões a partir de imagens (base64)  
