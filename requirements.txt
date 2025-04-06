@@ -1,0 +1,7 @@
+Flask==2.3.3
+flasgger==0.9.7.1
+opencv-python-headless==4.9.0.80
+numpy==1.26.4
+Pillow==10.2.0
+reportlab==4.1.0
+matplotlib==3.8.3

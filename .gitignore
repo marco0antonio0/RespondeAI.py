@@ -1,0 +1,24 @@
+# Ignorar bytecode compilado
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ignorar ambientes virtuais
+venv/
+env/
+.venv/
+.env/
+
+# Ignorar arquivos de configuração temporários
+*.log
+*.swp
+*.bak
+
+# Ignorar arquivos gerados por IDEs
+.idea/
+.vscode/
+*.iml
+
+# Ignorar arquivos temporários do sistema
+.DS_Store
+Thumbs.db
