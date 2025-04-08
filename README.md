@@ -12,7 +12,7 @@ O **RespondeAI** é um sistema de análise e correção automatizada de cartões
 
 ## 🚀 Acesse a documentação interativa (Swagger)
 
-📄 Swagger Docs - [https://respondeai.dirrocha.com/apidocs](https://respondeai.dirrocha.com/apidocs)
+📄 Swagger Docs - [https://api-respondeai.dirrocha.com/apidocs](https://api-respondeai.dirrocha.com/apidocs)
 
 ---
 
@@ -162,4 +162,4 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 Desenvolvido por **Marco Antonio da Silva Mesquita**  
 📬 Email: marco.mesquita.dev@gmail.com  
-🌍 [respondeai.dirrocha.com](https://respondeai.dirrocha.com)
+🌍 [respondeai.dirrocha.com](https://api-respondeai.dirrocha.com)
