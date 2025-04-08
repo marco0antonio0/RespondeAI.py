@@ -37,11 +37,13 @@ def gerar_cartao():
         quantidade = request.args.get("quantidade", type=int)
         marcar = request.args.get("marcar", default=False, type=lambda v: v.lower() == "true")
 
+        if quantidade is not None and quantidade > 30:
+            return jsonify({"erro": "A quantidade máxima permitida é 30 questões."}), 400
+
         dados = {"quantidade": quantidade, "marcar": marcar}
         return gerar_pdf_cartao(dados)
     except Exception as e:
         return jsonify({"erro": str(e)}), 400
-
 
 @cartao_blueprint.route("/corrigir", methods=["POST"])
 def corrigir():

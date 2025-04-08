@@ -60,7 +60,10 @@ def detectar_respostas_base64(imagem_base64):
 
 
 def desenhar_cartao(respostas_dict, marcar=True):
-    total_questoes = len(respostas_dict)
+    import matplotlib.pyplot as plt
+    import io
+
+    total_questoes = 30
     altura_por_questao = 0.7
     margem_topo = 3
     largura_total = 7
@@ -70,24 +73,44 @@ def desenhar_cartao(respostas_dict, marcar=True):
     ax.text(-1.2, total_questoes + 2, "Nome do Aluno:", fontsize=12, va="center", ha="left")
     ax.text(-1.2, total_questoes + 1, "Disciplina:", fontsize=12, va="center", ha="left")
 
-    for idx, (questao, alternativa) in enumerate(respostas_dict.items(), start=1):
+    for idx in range(1, total_questoes + 1):
         y = total_questoes - idx
-        ax.text(-0.6, y, f"{questao}", fontsize=12, va='center', ha='right')
+        alternativa = respostas_dict.get(str(idx))
+
+        # Só exibe o número da questão se ela existir
+        if alternativa is not None:
+            ax.text(-0.6, y, f"{idx}", fontsize=12, va='center', ha='right')
 
         for i, letra in enumerate("ABCDE"):
             x = i * 1.2
-            cor = "black" if (marcar and letra.upper() == alternativa.upper()) else "white"
-            circle = plt.Circle((x, y), 0.4, edgecolor="black", facecolor=cor, linewidth=1.5)
+
+            # Se for uma questão preenchida
+            if marcar and alternativa and letra.upper() == alternativa.upper():
+                facecolor = "black"
+                edgecolor = "black"
+                text = letra
+                textcolor = "white"
+
+            # Questão não marcada, mas dentro da quantidade
+            elif alternativa:
+                facecolor = "white"
+                edgecolor = "black"
+                text = letra
+                textcolor = "black"
+
+            # Questão excedente (não usada)
+            else:
+                facecolor = "white"
+                edgecolor = "#FFFFFF"  # cinza claro
+                text = ""
+                textcolor = "black"
+
+            circle = plt.Circle((x, y), 0.4, edgecolor=edgecolor, facecolor=facecolor, linewidth=1.5)
             ax.add_patch(circle)
-            ax.text(x, y, letra, fontsize=11, ha="center", va="center", color="black" if cor == "white" else "white")
+            ax.text(x, y, text, fontsize=11, ha="center", va="center", color=textcolor)
 
-    x_min, x_max = -2, 6.5
-    y_min, y_max = -1, total_questoes + margem_topo + 1
-
-    borda = plt.Rectangle((x_min, y_min), x_max - x_min, y_max - y_min, linewidth=2, edgecolor='black', facecolor='none')
-    ax.add_patch(borda)
-    ax.set_xlim(x_min, x_max)
-    ax.set_ylim(y_min, y_max)
+    ax.set_xlim(-2, 6.5)
+    ax.set_ylim(-1, total_questoes + margem_topo + 1)
     ax.set_aspect('equal')
     ax.axis("off")
 
