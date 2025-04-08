@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 from flasgger import Swagger
 from app.controllers.cartao_controller import cartao_blueprint
 from app.swagger_config import swagger_template, swagger_config
@@ -6,6 +7,7 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 
 app = Flask(__name__)
+CORS(app)
 app.register_blueprint(cartao_blueprint)
 
 
