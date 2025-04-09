@@ -51,9 +51,8 @@ def corrigir_imagem(dados):
 
     respostas_detectadas = detectar_respostas_base64(imagem_base64)
     acertos = 0
-
     for numero, resposta_correta in gabarito.items():
-        detectada = respostas_detectadas.get(int(numero))
+        detectada = respostas_detectadas.get(numero)  # Use 'numero' sem conversão
         if detectada and detectada.upper() == resposta_correta.upper():
             acertos += 1
 
