@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  respondeAI_backend:
+    build: .
+    container_name: respondeAI_backend
+    expose:
+      - "3000"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.respondeAI_backend.rule=Host(`api.respondeai.dirrocha.com`)"
+      - "traefik.http.routers.respondeAI_backend.entrypoints=websecure"
+      - "traefik.http.routers.respondeAI_backend.tls=true"
+      - "traefik.http.routers.respondeAI_backend.tls.certresolver=letsEncrypt"
+      - "traefik.http.services.respondeAI_backend.loadbalancer.server.port=3000"
+    networks:
+      - proxy
+    restart: always
+
+networks:
+  proxy:
+    external: true
+    name: traefik_proxy
