@@ -2,7 +2,7 @@ name: 🚀 EC2 Autoscaling + Deploys
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
 
 jobs:
   deploy:
