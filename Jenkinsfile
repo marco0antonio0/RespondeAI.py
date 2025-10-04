@@ -12,7 +12,7 @@ pipeline {
                 checkout scm
             }
         }
-
+  
         stage('Build') {
             steps {
                 echo "Buildando containers com Docker Compose..."
